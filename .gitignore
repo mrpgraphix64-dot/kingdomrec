@@ -1,0 +1,61 @@
+# Laravel .gitignore
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Sensitive database dumps & backups
+*.sql
+*.zip
+*.bak
+*.backup
+*.dump
+*.tar
+*.tar.gz
+*.7z
+*.rar
+*.pem
+*.key
+
+# Logs & caches
+*.log
+.phpunit.result.cache
+/.phpunit.cache
+
+# IDE & Editor artifacts
+.DS_Store
+Thumbs.db
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+.claude
+/.claude
+.claude/
+.phpactor.json
+
+# Dependencies
+/node_modules
+/vendor
+
+# Laravel build & generated artifacts
+/auth.json
+/public/build
+/public/hot
+/public/storage
+/public/uploads/cvs/*
+!/public/uploads/cvs/.gitkeep
+/public/uploads/photos/*
+!/public/uploads/photos/.gitkeep
+/storage/*.key
+/storage/pail
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
+# Other local configs
+Homestead.json
+Homestead.yaml

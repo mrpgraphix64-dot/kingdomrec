@@ -1,0 +1,35 @@
+/* Direct import from Google Fonts to fix live server hosting issues */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block');
+
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+
+    /* CRITICAL FOUT & LAYOUT FIX */
+    /* This prevents the long text ligatures (e.g. "history_toggle_off") 
+     from expanding the layout during load or JS failures. */
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    color: transparent !important;
+}
+
+/* Once fonts have loaded (via API or fast auto-load), show the icon */
+body.fonts-loaded .material-symbols-outlined,
+.fonts-loaded-manual .material-symbols-outlined {
+    color: inherit !important;
+    overflow: visible;
+}
