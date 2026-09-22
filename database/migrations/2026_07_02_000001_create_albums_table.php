@@ -11,34 +11,36 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('albums', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->integer('sort_order')->default(0);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('albums')) {
+            Schema::create('albums', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('slug')->unique();
+                $table->integer('sort_order')->default(0);
+                $table->timestamps();
+            });
 
-        // Seed default albums
-        $albums = [
-            'Corporate Events',
-            'Recruitment Drives',
-            'Training Sessions',
-            'Team Activities',
-            'Awards',
-            'Office',
-            'Community',
-            'Miscellaneous'
-        ];
+            // Seed default albums
+            $albums = [
+                'Corporate Events',
+                'Recruitment Drives',
+                'Training Sessions',
+                'Team Activities',
+                'Awards',
+                'Office',
+                'Community',
+                'Miscellaneous'
+            ];
 
-        foreach ($albums as $index => $name) {
-            \Illuminate\Support\Facades\DB::table('albums')->insert([
-                'name' => $name,
-                'slug' => \Illuminate\Support\Str::slug($name),
-                'sort_order' => $index,
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
+            foreach ($albums as $index => $name) {
+                \Illuminate\Support\Facades\DB::table('albums')->insert([
+                    'name' => $name,
+                    'slug' => \Illuminate\Support\Str::slug($name),
+                    'sort_order' => $index,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
         }
     }
 

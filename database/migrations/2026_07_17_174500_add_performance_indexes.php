@@ -17,29 +17,57 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('job_applications', function (Blueprint $table) {
-            $table->index('status');
-        });
+        if (Schema::hasTable('job_applications')) {
+            Schema::table('job_applications', function (Blueprint $table) {
+                if (!Schema::hasIndex('job_applications', ['status'])) {
+                    $table->index('status');
+                }
+            });
+        }
 
-        Schema::table('shift_slots', function (Blueprint $table) {
-            $table->index('status');
-            $table->index('shift_date');
-        });
+        if (Schema::hasTable('shift_slots')) {
+            Schema::table('shift_slots', function (Blueprint $table) {
+                if (!Schema::hasIndex('shift_slots', ['status'])) {
+                    $table->index('status');
+                }
+                if (!Schema::hasIndex('shift_slots', ['shift_date'])) {
+                    $table->index('shift_date');
+                }
+            });
+        }
 
-        Schema::table('applicants', function (Blueprint $table) {
-            $table->index('status');
-        });
+        if (Schema::hasTable('applicants')) {
+            Schema::table('applicants', function (Blueprint $table) {
+                if (!Schema::hasIndex('applicants', ['status'])) {
+                    $table->index('status');
+                }
+            });
+        }
 
-        Schema::table('event_bookings', function (Blueprint $table) {
-            $table->index('status');
-            $table->index('start_date');
-            $table->index('end_date');
-        });
+        if (Schema::hasTable('event_bookings')) {
+            Schema::table('event_bookings', function (Blueprint $table) {
+                if (!Schema::hasIndex('event_bookings', ['status'])) {
+                    $table->index('status');
+                }
+                if (!Schema::hasIndex('event_bookings', ['start_date'])) {
+                    $table->index('start_date');
+                }
+                if (!Schema::hasIndex('event_bookings', ['end_date'])) {
+                    $table->index('end_date');
+                }
+            });
+        }
 
-        Schema::table('job_posts', function (Blueprint $table) {
-            $table->index('status');
-            $table->index('deadline');
-        });
+        if (Schema::hasTable('job_posts')) {
+            Schema::table('job_posts', function (Blueprint $table) {
+                if (!Schema::hasIndex('job_posts', ['status'])) {
+                    $table->index('status');
+                }
+                if (!Schema::hasIndex('job_posts', ['deadline'])) {
+                    $table->index('deadline');
+                }
+            });
+        }
     }
 
     /**
@@ -47,28 +75,52 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('job_applications', function (Blueprint $table) {
-            $table->dropIndex(['status']);
-        });
+        if (Schema::hasTable('job_applications') && Schema::hasIndex('job_applications', ['status'])) {
+            Schema::table('job_applications', function (Blueprint $table) {
+                $table->dropIndex(['status']);
+            });
+        }
 
-        Schema::table('shift_slots', function (Blueprint $table) {
-            $table->dropIndex(['status']);
-            $table->dropIndex(['shift_date']);
-        });
+        if (Schema::hasTable('shift_slots')) {
+            Schema::table('shift_slots', function (Blueprint $table) {
+                if (Schema::hasIndex('shift_slots', ['status'])) {
+                    $table->dropIndex(['status']);
+                }
+                if (Schema::hasIndex('shift_slots', ['shift_date'])) {
+                    $table->dropIndex(['shift_date']);
+                }
+            });
+        }
 
-        Schema::table('applicants', function (Blueprint $table) {
-            $table->dropIndex(['status']);
-        });
+        if (Schema::hasTable('applicants') && Schema::hasIndex('applicants', ['status'])) {
+            Schema::table('applicants', function (Blueprint $table) {
+                $table->dropIndex(['status']);
+            });
+        }
 
-        Schema::table('event_bookings', function (Blueprint $table) {
-            $table->dropIndex(['status']);
-            $table->dropIndex(['start_date']);
-            $table->dropIndex(['end_date']);
-        });
+        if (Schema::hasTable('event_bookings')) {
+            Schema::table('event_bookings', function (Blueprint $table) {
+                if (Schema::hasIndex('event_bookings', ['status'])) {
+                    $table->dropIndex(['status']);
+                }
+                if (Schema::hasIndex('event_bookings', ['start_date'])) {
+                    $table->dropIndex(['start_date']);
+                }
+                if (Schema::hasIndex('event_bookings', ['end_date'])) {
+                    $table->dropIndex(['end_date']);
+                }
+            });
+        }
 
-        Schema::table('job_posts', function (Blueprint $table) {
-            $table->dropIndex(['status']);
-            $table->dropIndex(['deadline']);
-        });
+        if (Schema::hasTable('job_posts')) {
+            Schema::table('job_posts', function (Blueprint $table) {
+                if (Schema::hasIndex('job_posts', ['status'])) {
+                    $table->dropIndex(['status']);
+                }
+                if (Schema::hasIndex('job_posts', ['deadline'])) {
+                    $table->dropIndex(['deadline']);
+                }
+            });
+        }
     }
 };

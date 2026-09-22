@@ -14,18 +14,20 @@ return new class extends Migration
         Schema::dropIfExists('gallery_images');
         Schema::dropIfExists('albums');
 
-        Schema::create('gallery_items', function (Blueprint $table) {
-            $table->id();
-            $table->string('type')->default('image'); // 'image' or 'video'
-            $table->string('file_path');
-            $table->string('thumbnail_path')->nullable();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->string('alt_text')->nullable();
-            $table->string('status')->default('published'); // 'published' or 'hidden'
-            $table->integer('sort_order')->default(0);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('gallery_items')) {
+            Schema::create('gallery_items', function (Blueprint $table) {
+                $table->id();
+                $table->string('type')->default('image'); // 'image' or 'video'
+                $table->string('file_path');
+                $table->string('thumbnail_path')->nullable();
+                $table->string('title');
+                $table->text('description')->nullable();
+                $table->string('alt_text')->nullable();
+                $table->string('status')->default('published'); // 'published' or 'hidden'
+                $table->integer('sort_order')->default(0);
+                $table->timestamps();
+            });
+        }
     }
 
     /**
